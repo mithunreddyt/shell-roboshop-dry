@@ -34,6 +34,7 @@ status_check
 
 print_head "Switching directory and unzipping content"
 cd /app  &>>${log}
+rm -rf &>>${log}
 unzip /tmp/catalogue.zip &>>${log}
 status_check
 
