@@ -11,14 +11,8 @@ status_check
 
 print_head "Adding user"
 useradd roboshop &>>${log}
-id roboshop
-if [ $? -eq 0 ];
-  then
-    echo -e "\e[31mUSEREXISTED\e[0m"
-  else
-    useradd roboshop &>>Log
-    echo -e "\e[33mUSERCREATED\e[0m"
-fi
+id roboshop &>>{log}
+status_check
 
 print_head "creating app directory"
 mkdir /app
@@ -33,8 +27,11 @@ curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalo
 status_check
 
 print_head "Switching directory and unzipping content"
-cd /app  &>>${log}
-rm -rf &>>${log}
+cd /app
+if [ $? -ne 0 ];
+  then
+    rm -rf &>>${log}
+fi
 unzip /tmp/catalogue.zip &>>${log}
 status_check
 
