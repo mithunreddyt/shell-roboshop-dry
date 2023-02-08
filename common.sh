@@ -18,6 +18,6 @@ status_check() {
 
 mongo() {
   print_head "Creating mongo repo files"
-  cp ${scriptLocation}/files/mongo.repo /etc/yum.repos.d/mongo.repo &>{log}
+  cp ${scriptLocation}/files/mongo.repo /etc/yum.repos.d/mongo.repo &>>{log}
   status_check
 }
