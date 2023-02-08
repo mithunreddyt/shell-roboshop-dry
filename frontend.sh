@@ -27,6 +27,6 @@ print_head "Enabling Nginx"
 systemctl enable nginx &>${log}
 status_check
 
-print_head "Restarting Nginx"
-systemctl restart nginx &>${log}
+print_head "Start Nginx"
+systemctl start nginx &>${log}
 status_check
