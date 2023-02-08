@@ -6,14 +6,6 @@ print_head "Installing Nginx"
 yum install nginx -y &>${log}
 status_check
 
-print_head "Enabling Nginx"
-systemctl enable nginx &>${log}
-status_check
-
-print_head "Start Nginx"
-systemctl start nginx &>${log}
-status_check
-
 print_head "Cleaning Nginx old content"
 rm -rf /usr/share/nginx/html/* &>${log}
 status_check
@@ -29,6 +21,10 @@ status_check
 
 print_head "Creating roboshop configuration"
 cp "${scriptLocation}"/files/nginx-roboshop.conf /etc/nginx/default.d/roboshop.conf &>${log}
+status_check
+
+print_head "Enabling Nginx"
+systemctl enable nginx &>${log}
 status_check
 
 print_head "Restarting Nginx"
