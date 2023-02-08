@@ -35,7 +35,7 @@ curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalo
 status_check
 
 print_head "Switching directory and unzipping content"
-cd /app  &>{log}
+cd /app  &>>{log}
 unzip /tmp/catalogue.zip &>>{log}
 status_check
 
@@ -62,7 +62,7 @@ status_check
 mongo
 
 print_head "Installing mongo shell"
-yum install mongodb-org-shell -y &>{log}
+yum install mongodb-org-shell -y &>>{log}
 status_check
 
-mongo --host mongodb-dev.mithundevops.online </app/schema/catalogue.js &>{log}
+mongo --host mongodb-dev.mithundevops.online </app/schema/catalogue.js &>>{log}
