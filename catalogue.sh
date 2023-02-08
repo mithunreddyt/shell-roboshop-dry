@@ -19,7 +19,7 @@ if [ $? -eq 0 ];
 fi
 
 print_head "creating app directory"
-mkdir /app &>{log}
+mkdir /app
 status_check
 
 print_head "Domloading content"
