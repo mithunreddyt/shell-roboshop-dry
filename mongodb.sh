@@ -1,13 +1,23 @@
 #!/usr/bin/env bash
 
-scriptLocation=$(pwd)
-cp ${scriptLocation}/files/mongo.repo /etc/yum.repos.d/mongo.repo
+source common.sh
 
-yum install mongodb-org -y
+print_head "Creating mongo repo files"
+cp ${scriptLocation}/files/mongo.repo /etc/yum.repos.d/mongo.repo &>{log}
+status_check
 
-systemctl enable mongod
-systemctl start mongod
+print_head "Installing mongod"
+yum install mongodb-org -y &>{log}
+status_check
 
-sed -i -e 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
+print_head "Changing default configuration"
+sed -i -e 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>{log}
+status_check
 
-systemctl restart mongod
+print_head "Enabling mongod"
+systemctl enable mongod &>{log}
+status_check
+
+print_head "Restarting Mongod"
+systemctl restart mongod &>{log}
+status_check
