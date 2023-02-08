@@ -11,14 +11,14 @@ status_check
 
 print_head "Adding user"
 useradd roboshop &>>${log}
-id roboshop &>>{log}
+id roboshop &>>${log}
 status_check
 
 print_head "creating app directory"
 mkdir /app
-if [ $? -eq 0 ];
+if [ $? -ne 0 ];
   then
-    rm -rf
+    rm -rf*
 fi
 status_check
 
@@ -28,10 +28,6 @@ status_check
 
 print_head "Switching directory and unzipping content"
 cd /app
-if [ $? -ne 0 ];
-  then
-    rm -rf &>>${log}
-fi
 unzip /tmp/catalogue.zip &>>${log}
 status_check
 
