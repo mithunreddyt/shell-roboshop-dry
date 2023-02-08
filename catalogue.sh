@@ -18,7 +18,7 @@ print_head "creating app directory"
 mkdir /app
 if [ $? -ne 0 ];
   then
-    rm -rf*
+    rm -rf
 fi
 status_check
 
