@@ -20,8 +20,6 @@ if [ $? -eq 0 ];
     echo -e "\e[33mUSERCREATED\e[0m"
 fi
 
-pwd
-exit
 print_head "creating app directory"
 mkdir /app
 pwd
