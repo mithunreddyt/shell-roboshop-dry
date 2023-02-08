@@ -20,6 +20,12 @@ fi
 
 print_head "creating app directory"
 mkdir /app
+if [ $? -eq 0 ];
+ then
+   echo rm -rf
+ else
+  mkdir /app
+fi
 status_check
 
 print_head "Domloading content"
