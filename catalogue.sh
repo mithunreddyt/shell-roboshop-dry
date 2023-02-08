@@ -24,6 +24,8 @@ pwd
 exit
 print_head "creating app directory"
 mkdir /app
+pwd
+exit
 if [ $? -eq 0 ];
  then
    echo rm -rf
