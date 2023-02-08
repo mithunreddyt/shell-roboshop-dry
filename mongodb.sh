@@ -2,9 +2,7 @@
 
 source common.sh
 
-print_head "Creating mongo repo files"
-cp ${scriptLocation}/files/mongo.repo /etc/yum.repos.d/mongo.repo &>{log}
-status_check
+mongo
 
 print_head "Installing mongod"
 yum install mongodb-org -y &>{log}
