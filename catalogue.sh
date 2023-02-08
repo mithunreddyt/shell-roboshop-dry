@@ -22,13 +22,10 @@ fi
 
 print_head "creating app directory"
 mkdir /app
-if [ $? -eq 0 ];
- then
-   echo rm -rf
- else
-  mkdir /app
-fi
 status_check
+if [ $? -eq 0  ];
+  then rm -rf
+fi
 
 print_head "Domloading content"
 curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>{log}
