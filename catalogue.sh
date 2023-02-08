@@ -10,7 +10,7 @@ yum install nodejs -y &>{log}
 status_check
 
 print_head "Adding user"
-useradd roboshop
+useradd roboshop &>{log}
 if [ $? -eq 0 ];
   then
     echo -e "\e[31mUSEREXISTED\e[0m"
@@ -19,42 +19,42 @@ if [ $? -eq 0 ];
 fi
 
 print_head "creating app directory"
-mkdir /app
+mkdir /app &>{log}
 status_check
 
 print_head "Domloading content"
-curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
+curl -L -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>{log}
 status_check
 
 print_head "Switching directory and unzipping content"
-cd /app
-unzip /tmp/catalogue.zip
+cd /app  &>{log}
+unzip /tmp/catalogue.zip &>{log}
 status_check
 
 print_head "Installing Npm"
-npm install
+npm install &>{log}
 status_check
 
 print_head "Creating catalogue service"
-cp "${scriptLocation}"/files/catalogue.service /etc/systemd/system/catalogue.service
+cp "${scriptLocation}"/files/catalogue.service /etc/systemd/system/catalogue.service &>{log}
 status_check
 
 print_head "Deamon reload"
-systemctl deamon-reload
+systemctl daemon-reload &>{log}
 status_check
 
 print_head "Enable Catalogue"
-systemctl enable catalogue
+systemctl enable catalogue &>{log}
 status_check
 
 print_head "Start Catalogue"
-systemctl start catalogue
+systemctl start catalogue &>{log}
 status_check
 
 mongo
 
 print_head "Installing mongo shell"
-yum install mongodb-org-shell -y
+yum install mongodb-org-shell -y &>{log}
 status_check
 
-mongo --host mongodb-dev.mithundevops.online </app/schema/catalogue.js
+mongo --host mongodb-dev.mithundevops.online </app/schema/catalogue.js &>{log}
