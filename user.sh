@@ -3,7 +3,5 @@
 source common.sh
 
 component=user
-
-Node_js
-
-mongo
+schema_load=false
+node_js
