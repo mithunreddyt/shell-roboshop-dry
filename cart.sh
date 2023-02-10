@@ -2,7 +2,5 @@
 source common.sh
 
 component=cart
-
-Node_js
-
-mongo
+schema_load=false
+node_js
