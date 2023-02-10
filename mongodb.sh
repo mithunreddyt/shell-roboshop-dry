@@ -2,13 +2,15 @@
 
 source common.sh
 
-mongo
+print_head "Copy MongoDB Repo File"
+cp ${scriptLocation}/files/mongo.repo /etc/yum.repos.d/mongo.repo &>>{log}
+Status_check
 
 print_head "Installing mongod"
 yum install mongodb-org -y &>>${log}
 status_check
 
-print_head "Changing default configuration"
+print_head "Updating Mongodb Listen Address"
 sed -i -e 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>>${log}
 status_check
 

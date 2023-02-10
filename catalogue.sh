@@ -2,7 +2,6 @@
 source common.sh
 
 component=catalogue
-
-Node_js
-
-mongo
+schema_load=true
+schema_type=mongo
+node_js
