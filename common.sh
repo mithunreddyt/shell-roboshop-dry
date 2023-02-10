@@ -26,7 +26,7 @@ mongo() {
   status_check
 
   print_head "Downloading Schema"
-  mongo --host mongodb-dev.mithundevops.online </app/schema/{component}.js &>>${log}
+  mongo --host mongodb-dev.mithundevops.online </app/schema/${component}.js &>>${log}
 }
 
 Node_js() {
@@ -52,12 +52,12 @@ Node_js() {
   status_check
 
   print_head "Domloading content"
-  curl -L -o /tmp/{component}.zip https://roboshop-artifacts.s3.amazonaws.com/{component}.zip &>>${log}
+  curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log}
   status_check
 
   print_head "Switching directory and unzipping content"
   cd /app
-  unzip /tmp/{component}.zip &>>${log}
+  unzip /tmp/${component}.zip &>>${log}
   status_check
 
   print_head "Installing Npm"
@@ -65,7 +65,7 @@ Node_js() {
   status_check
 
   print_head "Creating catalogue service"
-  cp "${scriptLocation}"/files/{component}.service /etc/systemd/system/{component}.service &>>${log}
+  cp "${scriptLocation}"/files/${component}.service /etc/systemd/system/${component}.service &>>${log}
   status_check
 
   print_head "Deamon reload"
@@ -73,11 +73,11 @@ Node_js() {
   status_check
 
   print_head "Enable Catalogue"
-  systemctl enable {component} &>>${log}
+  systemctl enable ${component} &>>${log}
   status_check
 
   print_head "Start Catalogue"
-  systemctl start {component} &>>${log}
+  systemctl start ${component} &>>${log}
   status_check
 
 }
