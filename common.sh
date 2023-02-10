@@ -27,6 +27,7 @@ mongo() {
 
   print_head "Downloading Schema"
   mongo --host mongodb-dev.mithundevops.online </app/schema/${component}.js &>>${log}
+  status_check
 }
 
 Node_js() {
