@@ -4,7 +4,7 @@ source common.sh
 
 print_head "Copy MongoDB Repo File"
 cp ${scriptLocation}/files/mongo.repo /etc/yum.repos.d/mongo.repo &>>{log}
-Status_check
+status_check
 
 print_head "Installing mongod"
 yum install mongodb-org -y &>>${log}
