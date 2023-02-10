@@ -45,19 +45,18 @@ Node_js() {
   status_check
 
   print_head "creating app directory"
-  mkdir /app
-  if [ $? -eq 0 ];
-    then
-      rm -rf */app
-  fi
+  mkdir -p /app &>>${log}
   status_check
 
   print_head "Domloading content"
   curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log}
   status_check
 
+  print_head "Deleting old content"
+  rm -rf /app/* &>>${log}
+  status_check
+
   print_head "Switching directory and unzipping content"
-  rm -rf */app
   cd /app
   unzip /tmp/${component}.zip &>>${log}
   status_check
