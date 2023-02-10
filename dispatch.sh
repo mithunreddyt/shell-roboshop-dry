@@ -1,29 +1,13 @@
-scriptLocation=$(pwd)
+#!/usr/bin/env bash
 
-yum install golang -y
+source common.sh
 
-useradd roboshop
+component=dispatch
+schema_load=false
 
-mkdir /app
+if [ -z "${roboshop_amqp_password}" ]; then
+  echo "Variable roboshop_amqp_password is missing"
+  exit 1
+fi
 
-curl -L -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch.zip
-
-cd /app
-
-unzip /tmp/dispatch.zip
-
-cd /app
-
-go mod init dispatch
-
-go get
-
-go build
-
-cp "${scriptLocation}"/files/dispatch.service /etc/systemd/system/dispatch.service
-
-systemctl daemon-reload
-
-systemctl enable dispatch
-
-systemctl start dispatch
+golang

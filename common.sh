@@ -110,5 +110,60 @@ node_js() {
   systemd_setup
 
   load_schema
+}
 
+maven(){
+
+  print_head "Installing Maven"
+  yum install maven -y &>>${log}
+  status_check
+
+  app_preq
+
+  print_head "moving cleaning packaging"
+  cd /app
+  mvn clean package
+  mv target/{component}-1.0.jar {component}.jar
+
+  systemd_setup
+
+  load_schema
+}
+
+python(){
+  print_head "Installing python"
+  yum install python36 gcc python3-devel -y &>>${log}
+  status_check
+
+  app_preq
+
+  print_head "installing requirements"
+  cd /app &>>${log}
+  pip3.6 install -r requirements.txt &>>{log}
+  status_check
+
+  print_head "Update Passwords in Service File"
+  sed -i -e "s/roboshop_rabbitmq_password/${roboshop_rabbitmq_password}/" ${script_location}/files/${component}.service  &>>${LOG}
+  status_check
+
+  systemd_setup
+}
+
+golang() {
+   print_head "Installing golang"
+   yum install golang -y &>>${log}
+   status_check
+
+   app_preq
+
+  print_head "installing dependencies"
+  cd /app &>>${log}
+  go mod init dispatch &>>${log}
+  go get &>>${log}
+  go build &>>${log}
+  status_check
+
+  print_head "Update Passwords in Service File"
+  sed -i -e "s/roboshop_amqp_password/${roboshop_amqp_password}/" ${script_location}/files/${component}.service  &>>${LOG}
+  status_check
 }

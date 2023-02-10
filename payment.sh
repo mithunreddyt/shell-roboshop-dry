@@ -1,26 +1,13 @@
-scriptLocation=$(pwd)
+#!/usr/bin/env bash
 
-yum install python36 gcc python3-devel -y
+source common.sh
 
-useradd roboshop
+component=payment
+schema_load=false
 
-mkdir /app
+if [ -z "${roboshop_rabbitmq_password}" ]; then
+  echo "Variable roboshop_rabbitmq_password is missing"
+  exit 1
+fi
 
-curl -L -o /tmp/payment.zip https:/roboshop-artifacts.s3.amazonaws.com/payment.zip
-
-cd /app
-
-unzip /tmp/payment.zip
-
-cd /app
-
-pip3.6 install -r requirements.txt
-
-cp "${scriptLocation}"/files/payment.service /etc/systemd/system/payment.service
-
-systemctl daemon-reload
-
-systemctl enable payment
-
-systemctl start payment
-
+python
