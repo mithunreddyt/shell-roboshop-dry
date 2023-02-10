@@ -48,7 +48,7 @@ Node_js() {
   mkdir /app
   if [ $? -eq 0 ];
     then
-      rm -rf
+      rm -rf */app
   fi
   status_check
 
@@ -57,6 +57,7 @@ Node_js() {
   status_check
 
   print_head "Switching directory and unzipping content"
+  rm -rf */app
   cd /app
   unzip /tmp/${component}.zip &>>${log}
   status_check
